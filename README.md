@@ -354,7 +354,7 @@ See also the list of [contributors](https://github.com/RoXaAF/SCHOLARSHIP-EVALUA
 ## 📞 Contact & Support
 
 - **Issues**: [GitHub Issues](https://github.com/RoXaAF/SCHOLARSHIP-EVALUATOR-ML-NJUPT/issues)
-- **Email**: [your-email@example.com]
+- **Email**: [af.manager.business@gmail.com]
 - **Documentation**: [Wiki](https://github.com/RoXaAF/SCHOLARSHIP-EVALUATOR-ML-NJUPT/wiki)
 
 ---
@@ -365,9 +365,9 @@ If you use this system in your research, please cite:
 
 ```bibtex
 @software{scholarship_evaluator_njupt,
-  author = {RoXaAF},
+  author = {AFAKIR},
   title = {Scholarship Evaluator ML - NJUPT},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/RoXaAF/SCHOLARSHIP-EVALUATOR-ML-NJUPT}
 }
 ```
