@@ -1,0 +1,80 @@
+import pandas as pd
+from typing import List, Optional
+import random
+
+# Sample data for list fields
+AWARD_OPTIONS = ["Dean's List", "Honors Scholarship", "Research Grant", "Best Paper", "Community Service", "Leadership Award", "Academic Excellence", "Sports Achievement"]
+PUBLICATION_OPTIONS = ["Journal Paper on AI", "Conference Paper on ML", "Research Review", "Book Chapter", "Technical Report"]
+LEADERSHIP_OPTIONS = ["Club President", "Team Captain", "Event Coordinator", "Student Representative", "Committee Member"]
+
+# First and last names for diversity
+FIRST_NAMES = ["Emma", "Liam", "Olivia", "Noah", "Ava", "Ethan", "Sophia", "Logan", "Mia", "Lucas", 
+               "Isabella", "Mason", "Amelia", "Oliver", "Charlotte", "Elijah", "Harper", "James", "Evelyn", "Benjamin",
+               "Sophie", "William", "Abigail", "Michael", "Elizabeth", "Alexander", "Grace", "Daniel", "Chloe", "Matthew"]
+LAST_NAMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+              "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Lee",
+              "White", "Harris", "Martin", "Thompson", "Young", "King", "Wright", "Scott", "Green", "Adams"]
+
+data = []
+
+for i in range(1, 31):
+    student_id = f"S{str(i).zfill(3)}"
+    name = f"{random.choice(FIRST_NAMES)} {random.choice(LAST_NAMES)}"
+    
+    # Updated constraints as specified
+    attendance_rate = round(random.uniform(88.0, 100.0), 1)
+    penalty_points = 0  # All zero as specified
+    # Important absences: 0-1 but mostly 1 (70% chance of 1, 30% chance of 0)
+    important_absences = 1 if random.random() < 0.7 else 0
+    cumulative_gpa = round(random.uniform(2.8, 4.4), 2)
+    previous_year_gpa = round(random.uniform(2.8, 4.4), 2)
+    failed_credits = random.randint(0, 1)  # Only 0 or 1
+    
+    # List fields with random selections
+    awards = random.sample(AWARD_OPTIONS, random.randint(0, 3))
+    publications = random.sample(PUBLICATION_OPTIONS, random.randint(0, 2))
+    leadership_roles = random.sample(LEADERSHIP_OPTIONS, random.randint(0, 2))
+    
+    # Fixed values as specified
+    fees_paid = True  # All paid
+    has_serious_violations = False  # No serious violations
+    interview_score = round(random.uniform(70.0, 95.0), 1)  # Slightly higher range given good students
+    semester = random.choice([1, 2])
+    year = 2025  # All 2025
+    
+    data.append({
+        "student_id": student_id,
+        "name": name,
+        "attendance_rate": attendance_rate,
+        "penalty_points": penalty_points,
+        "important_absences": important_absences,
+        "cumulative_gpa": cumulative_gpa,
+        "previous_year_gpa": previous_year_gpa,
+        "failed_credits": failed_credits,
+        "awards": awards,
+        "publications": publications,
+        "leadership_roles": leadership_roles,
+        "fees_paid": fees_paid,
+        "has_serious_violations": has_serious_violations,
+        "interview_score": interview_score,
+        "semester": semester,
+        "year": year
+    })
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Save to Excel
+df.to_excel("student_performance_2025.xlsx", index=False)
+
+# Display sample of the data
+print("Dataset created with 30 students for 2025!")
+print("\nFirst 8 records:")
+print(df.head(8).to_string())
+
+# Display summary statistics
+print(f"\nSummary Statistics:")
+print(f"Attendance Rate: {df['attendance_rate'].min():.1f}% - {df['attendance_rate'].max():.1f}%")
+print(f"GPA Range: {df['cumulative_gpa'].min():.2f} - {df['cumulative_gpa'].max():.2f}")
+print(f"Students with 0 failed credits: {(df['failed_credits'] == 0).sum()}/30")
+print(f"Students with important absences: {(df['important_absences'] == 1).sum()}/30")
